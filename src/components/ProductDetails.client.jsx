@@ -1,21 +1,24 @@
 import {
     ProductOptionsProvider,
-    MediaFile,
     useProductOptions,
     ProductPrice,
-    BuyNowButton,
     AddToCartButton,
 } from "@shopify/hydrogen";
+
+import { Navigation, Pagination, Thumbs } from 'swiper';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/swiper-bundle.css';
+import Ribbon from '../assets/schleifenneoric.jpg';
+
+// import { useState } from 'react';
 
 export default function ProductDetails({ product }) {
     return (
         <ProductOptionsProvider data={product}>
             <section className="productDetailSection">
-                <div className="flex content-between">
-                    <div className="galleryWrapper">
-                        <div className="w-100">
-                            <ProductGallery media={product.media.nodes} />
-                        </div>
+                <div className="flex">
+                    <div className="galleryWrapper flex">
+                        <ProductGallery media={product.media.nodes} />
                     </div>
                     <div className="detailsWrapper">
                         <div className="">
@@ -27,12 +30,29 @@ export default function ProductDetails({ product }) {
                             </span>
                         </div>
                         <ProductForm product={product} />
-                        {/* <div className="">
-                            <div
-                                className=""
-                                dangerouslySetInnerHTML={{ __html: product.descriptionHtml }}
-                            ></div>
-                        </div> */}
+                    </div>
+                </div>
+            </section>
+            <section className="ribbonSection flex">
+                <div className="flex">
+                    <img src={Ribbon} alt="ribbon" />
+                    <div>
+                        <h3>100% Qualität</h3>
+                        <p>Dank weichem Silikon</p>
+                    </div>
+                </div>
+                <div className="flex">
+                    <img src={Ribbon} alt="ribbon" />
+                    <div>
+                        <h3>100% Qualität</h3>
+                        <p>Dank weichem Silikon</p>
+                    </div>
+                </div>
+                <div className="flex">
+                    <img src={Ribbon} alt="ribbon" />
+                    <div>
+                        <h3>100% Qualität</h3>
+                        <p>Dank weichem Silikon</p>
                     </div>
                 </div>
             </section>
@@ -106,17 +126,6 @@ function PurchaseMarkup() {
                     {isOutOfStock ? "Leider ausverkauft" : "In den Einkaufswagen"}
                 </span>
             </AddToCartButton>
-            {/* {isOutOfStock ? (
-                <span className="">
-                    Available in 2-3 weeks
-                </span>
-            ) : (
-                <BuyNowButton variantId={selectedVariant.id}>
-                    <span className="">
-                        Buy it now
-                    </span>
-                </BuyNowButton>
-            )} */}
         </>
     );
 }
@@ -155,45 +164,73 @@ function OptionRadio({ values, name }) {
 }
 
 function ProductGallery({ media }) {
+
+    // const [thumbsSwiper, setThumbsSwiper] = useState();
+
     if (!media.length) {
         return null;
     }
-
     return (
-        <div
-        // className={`grid gap-4 overflow-x-scroll grid-flow-col md:grid-flow-row  md:p-0 md:overflow-x-auto md:grid-cols-2 w-screen md:w-full lg:col-span-2`}
-        >
-            {media.map((med, i) => {
-                let extraProps = {};
+        <>
+            <Swiper
+                modules={[Thumbs]}
+                spaceBetween={15}
+                slidesPerView={4}
+                watchSlidesProgress
+                // onSwiper={setThumbsSwiper}
+                grabCursor={true}
+                direction="vertical"
+                className="thumbs"
+            >
+                {media.map((med) => {
 
-                const data = {
-                    ...med,
-                    image: {
-                        ...med.image,
-                        altText: med.alt || "Product image",
-                        id: med.id,
-                    },
-                };
+                    const data = {
+                        ...med,
+                        image: {
+                            ...med.image,
+                            altText: med.alt || "Product image",
+                            id: med.id,
+                        },
+                    };
 
-                return (
-                    <div
-                        // className=
-                        // {`${i % 3 === 0 ? "md:col-span-2" : "md:col-span-1"
-                        //     } snap-center card-image bg-white aspect-square md:w-full w-[80vw] shadow-sm rounded`}
-                        key={med.id || med.image.id}
-                    >
-                        <MediaFile
-                            tabIndex="0"
-                            // className={`w-full h-full aspect-square object-cover`}
-                            data={data}
-                            options={{
-                                crop: "center",
-                            }}
-                            {...extraProps}
-                        />
-                    </div>
-                );
-            })}
-        </div>
+                    return (
+                        <SwiperSlide key={data.id}>
+                            <img className="swiperImg" src={data.image.url} alt={data.image.altText} />
+                        </SwiperSlide>
+                    );
+                })}
+            </Swiper >
+            <Swiper
+                modules={[Navigation, Pagination, Thumbs]}
+                spaceBetween={15}
+                slidesPerView={"auto"}
+                centeredSlides={true}
+                navigation={true}
+                grabCursor={true}
+                pagination={{ clickable: true }}
+                // thumbs={{ swiper: thumbsSwiper }}
+                className="galleryLarge"
+            >
+                {media.map((med) => {
+
+                    const data = {
+                        ...med,
+                        image: {
+                            ...med.image,
+                            altText: med.alt || "Product image",
+                            id: med.id,
+                        },
+                    };
+
+                    console.log(data);
+
+                    return (
+                        <SwiperSlide key={data.id}>
+                            <img className="swiperImg" src={data.image.url} alt={data.image.altText} />
+                        </SwiperSlide>
+                    );
+                })}
+            </Swiper >
+        </>
     );
 }

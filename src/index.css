@@ -2,12 +2,18 @@
 @tailwind components;
 @tailwind utilities;
 
+/* GENERAL STYLES */
 html {
     font-family: 'Montserrat', sans-serif;
 }
 
+/* =================================================================
+                MOBILE VERSION
+==================================================================== */
+
+/* HEADER STYLES */
 .aboveHeader {
-    background-color: #383838;
+    background-color: #616060;
     text-align: center;
     padding: 2vh 0;
 }
@@ -26,13 +32,58 @@ header {
     width: 5vw;
 }
 
-.productDetailSection {
+/* PAGE LAYOUT */
+
+.productDetailSection, .ribbonSection {
     padding: 43px 400px;
 }
 
 .galleryWrapper {
     width: 600px;
+    height: 480px;
+    gap: 20px;
+    position: relative;
 }
+
+/* GALLERY */
+
+.galleryLarge {
+    width: 480px;
+    height: 480px;
+    position: static !important;
+}
+
+.swiperImg {
+    border-radius: 5px;
+}
+
+.swiper-button-prev::after, .swiper-button-next::after {
+    color: #000;
+    font-size: 12px !important;
+    font-weight: 700;
+}
+
+.swiper-button-prev, .swiper-button-next {
+    top: 105% !important;
+}
+
+.swiper-button-prev {
+    left: 55% !important;
+}
+
+.swiper-button-next {
+    right: 35% !important;
+}
+
+.thumbs {
+    width: 100px;
+}
+
+.swiper-pagination {
+    display: none;
+}
+
+/* PRODUCTDETAILS */
 
 .detailsWrapper {
     margin: auto 50px;
@@ -44,6 +95,7 @@ header {
     border-radius: 5px;
     border: 1px solid #00000029;
     width: 475px;
+    font-size: 18px;
 }
 
 .productTitle {
@@ -52,7 +104,6 @@ header {
 }
 
 .productVendor {
-    font-size: 18px;
     padding-bottom: 14px;
     display: inline-block;
 }
@@ -62,7 +113,6 @@ header {
 }
 
 .originalPrice {
-    font-size: 18px;
     font-weight: 600;
     text-decoration: line-through;
     padding-right: 20px;
@@ -70,7 +120,6 @@ header {
 
 .actualPrice {
     color: #1F47FF;
-    font-size: 18px;
     font-weight: 600;
     padding-right: 6px;
 }
@@ -86,6 +135,149 @@ header {
     height: 52px;
     width: 100%;
     margin-top: 37px;
-    font-size: 18px;
     font-weight: 600;
 }
+
+/* RIBBONSECTION */
+
+.ribbonSection {
+    justify-content: space-between;
+}
+
+.ribbonSection img {
+    width: 57px;
+    height: 57px;
+    object-fit: contain;
+}
+
+.ribbonSection div div {
+    padding-left: 20px;
+    font-size: 18px;
+}
+
+.ribbonSection div h3 {
+    font-weight: 600;
+}
+
+/* =================================================================
+                MOBILE VERSION
+==================================================================== */
+
+@media (max-width: 575.98px) { 
+    /* HEADER STYLES */
+.aboveHeader {
+    padding: 1.5vh 0;
+}
+
+.aboveHeader p {
+    font-size: 16px;
+}
+
+.logo {
+    width: 30vw;
+}
+
+/* PAGE LAYOUT */
+
+.productDetailSection, .ribbonSection {
+    padding: 15px 0 0 0;
+}
+.productDetailSection>div {
+    flex-direction: column;
+    align-items: center;
+}
+.galleryWrapper {
+    width: 100%;
+    height: 350px;
+    margin-bottom: 30px;
+}
+
+/* GALLERY */
+
+.galleryLarge {
+    width: 100%;
+    height: 100%;
+}
+
+.swiper-slide {
+    width: 350px !important;
+}
+.swiperImg {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
+
+.swiper-button-prev {
+   display: none !important;
+}
+
+.swiper-button-next {
+    display: none !important;
+}
+
+.thumbs {
+    display: none;
+}
+
+.swiper-pagination {
+    display: block;
+    top: 102%;
+}
+
+.swiper-pagination-bullet {
+    width: 10px !important;
+    height: 10px !important;
+}
+
+.swiper-pagination-bullet-active {
+    background-color: #E5E5E5 !important;
+}
+/* PRODUCTDETAILS */
+
+.detailsWrapper {
+    margin: auto;
+    padding: 26px 20px;
+    width: 350px;
+    font-size: 16px;
+}
+
+.productTitle {
+    font-size: 22px;
+}
+
+.productVendor {
+    padding-bottom: 16px;
+}
+
+.toCartButton {
+    margin-top: 34px;
+}
+
+/* RIBBONSECTION */
+
+.ribbonSection {
+    flex-direction: column;
+    align-items: center;
+    gap: 29px;
+    padding-top: 36px;
+    padding-bottom: 20vh;
+}
+
+.ribbonSection img {
+    width: 48px;
+    height: 48px;
+}
+
+.ribbonSection div div {
+    padding-left: 25px;
+    font-size: 16px;
+}
+
+.ribbonSection div h3 {
+    font-weight: 600;
+}
+ }
+
+
+
